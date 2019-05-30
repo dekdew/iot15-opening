@@ -1,0 +1,31 @@
+[debug] [2019-05-30T10:41:50.454Z] ----------------------------------------------------------------------
+[debug] [2019-05-30T10:41:50.458Z] Command:       /usr/local/Cellar/node/12.1.0/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-05-30T10:41:50.458Z] CLI Version:   6.10.0
+[debug] [2019-05-30T10:41:50.458Z] Platform:      darwin
+[debug] [2019-05-30T10:41:50.458Z] Node Version:  v12.1.0
+[debug] [2019-05-30T10:41:50.460Z] Time:          Thu May 30 2019 17:41:50 GMT+0700 (Indochina Time)
+[debug] [2019-05-30T10:41:50.460Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-05-30T10:41:50.491Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-30T10:41:50.492Z] > authorizing via signed-in user
+[debug] [2019-05-30T10:41:50.492Z] [iam] checking project itcamp15-openceremony for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-05-30T10:41:50.494Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/itcamp15-openceremony:testIamPermissions  
+
+[debug] [2019-05-30T10:41:52.273Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T10:41:52.276Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/itcamp15-openceremony  
+ 
+[debug] [2019-05-30T10:41:52.765Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'itcamp15-openceremony'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-05-30T10:41:52.773Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/itcamp15-openceremony/versions  
+
+[debug] [2019-05-30T10:41:55.427Z] <<< HTTP RESPONSE 200
+[info] i  hosting[itcamp15-openceremony]: beginning deploy...
+[info] i  hosting[itcamp15-openceremony]: found 17 files in dist
+[debug] [2019-05-30T10:41:55.442Z] [hosting] hash cache [ZGlzdA] load error: lines is not defined
+[debug] [2019-05-30T10:41:56.336Z] [hosting] hash cache [ZGlzdA] stored for 17 files
+[debug] [2019-05-30T10:41:56.336Z] [hosting][hash queue][FINAL]
+[debug] [2019-05-30T10:41:56.336Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/itcamp15-openceremony/versions/83176e111c19d4bc:populateFiles  
+ <request body omitted>
