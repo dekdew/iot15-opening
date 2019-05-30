@@ -121,15 +121,16 @@ export default {
 				}
 			}
 
-			this.setAnimation(10, 1)
+			let randomTime = Math.floor(Math.random() * (+10 - +5) + +5)
+			this.setAnimation(randomTime, 1)
 
 			setTimeout(() => {
 				this.$refs.mycarousel.goSlide(rnd)
-
-				this.user['group'] = this.group[rnd]
 				this.user_group = this.user.group.name
-			}, 5500)
+			}, randomTime*500+500)
 
+			this.user['group'] = this.group[rnd]
+			
 			firebase.database().ref('users/' + this.userId).set(this.user)
 
 			firebase.database().ref('group/' + this.user.group.id).update({
