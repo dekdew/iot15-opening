@@ -87,7 +87,7 @@ export default {
 
       this.shuffle(this.rndArr)
       let rnd = this.rndArr[0]
-      setTimeout(() => box[rnd-1].classList.add('select'), 2000)
+      setTimeout(() => box[rnd-1].classList.add('select'), 500)
       setTimeout(() => this.$router.push('/wand/' + rnd), 4000)
     },
   }
