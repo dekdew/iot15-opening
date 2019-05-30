@@ -28,70 +28,87 @@
 
 <script>
 import firebase from 'firebase'
-import { Carousel3d, Slide } from 'vue-carousel-3d'
+import {
+	Carousel3d,
+	Slide
+} from 'vue-carousel-3d'
 
 export default {
-  name: 'wand',
-  data() {
-    return {
+	name: 'wand',
+	data() {
+		return {
 			userId: this.$route.params.id,
 			user: null,
 			group: null,
 			wand: null,
 			stop: false,
 			slides: 6,
-			user_group: null
-    }
+			user_group: null,
+		}
 	},
 	components: {
 		Carousel3d,
 		Slide
-  },
+	},
 	mounted() {
 		let self = this
 		let userData = firebase.database().ref('users/' + self.userId)
-		userData.on('value', function(snapshot) {
+		userData.on('value', function (snapshot) {
 			self.user = snapshot.val()
 		})
-		
+
 		let groupData = firebase.database().ref('group/')
-		groupData.on('value', function(snapshot) {
+		groupData.on('value', function (snapshot) {
 			self.group = snapshot.val()
 		})
-		
+
 		if (self.group == null) {
-			firebase.database().ref('group/').set([
-				{
-					'id': 0,
-					'name': 'A',
-					'count': 0
-				}, {
-					'id': 1,
-					'name': 'B',
-					'count': 0
-				}, {
-					'id': 2,
-					'name': 'C',
-					'count': 0
-				}, {
-					'id': 3,
-					'name': 'D',
-					'count': 0
-				}, {
-					'id': 4,
-					'name': 'E',
-					'count': 0
-				}, {
-					'id': 5,
-					'name': 'F',
-					'count': 0
-				}
-			])
+			firebase.database().ref('group/').set([{
+				'id': 0,
+				'name': 'A',
+				'count': 0
+			}, {
+				'id': 1,
+				'name': 'B',
+				'count': 0
+			}, {
+				'id': 2,
+				'name': 'C',
+				'count': 0
+			}, {
+				'id': 3,
+				'name': 'D',
+				'count': 0
+			}, {
+				'id': 4,
+				'name': 'E',
+				'count': 0
+			}, {
+				'id': 5,
+				'name': 'F',
+				'count': 0
+			}])
 		}
 	},
 	methods: {
 		getImgUrl(pic) {
-			return require('../assets/wand/'+pic)
+			return require('../assets/wand/' + pic)
+		},
+		setAnimation(i, last) {
+			let min = 0
+			let max = 6
+			let rnd = Math.floor(Math.random() * (+max - +min) + +min)
+			if (rnd == last) {
+				this.setAnimation(i, last)
+			} else {
+				setTimeout(() => {
+					this.$refs.mycarousel.goSlide(rnd)
+					if (--i) {
+						this.setAnimation(i, rnd)
+					}
+					
+				}, 500)
+			}
 		},
 		randomWand() {
 			let min = 0
@@ -104,11 +121,14 @@ export default {
 				}
 			}
 
-			this.$refs.mycarousel.goSlide(rnd)
+			this.setAnimation(10, 1)
 
-			this.user['group'] = this.group[rnd]
+			setTimeout(() => {
+				this.$refs.mycarousel.goSlide(rnd)
 
-			this.user_group = this.user.group.name
+				this.user['group'] = this.group[rnd]
+				this.user_group = this.user.group.name
+			}, 5500)
 
 			firebase.database().ref('users/' + this.userId).set(this.user)
 
