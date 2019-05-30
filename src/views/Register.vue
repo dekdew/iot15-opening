@@ -45,7 +45,9 @@ export default {
 			firebase.database().ref('users/' + userId).set({
 				id: userId,
 				name: name,
-				group: null
+				group: {
+					name: ""
+				}
 			})
 		},
 		getImgUrl(pic) {

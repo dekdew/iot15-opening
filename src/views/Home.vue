@@ -5,7 +5,10 @@
       <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
       <div class="row my-4">
         <div v-for="user in user_list" :key="user.id" class="col-2 p-4 name-box">
-          <div class="box border rounded px-3 py-2">
+          <div v-if="user.group" :class="[user.group.name, 'box', 'border', 'rounded', 'px-3', 'py-2']">
+            <h4>{{ user.name }} | {{ user.group.name }}</h4>
+          </div>
+          <div v-else :class="['box', 'border', 'rounded', 'px-3', 'py-2']">
             <h4>{{ user.name }}</h4>
           </div>
         </div>

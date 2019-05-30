@@ -14,8 +14,11 @@
         <img class="mt-4" :src="getImgUrl('logo.png')" height="150em">
         <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
         <div class="row my-4">
-          <div v-for="user in user_list" :key="user.id" class="col-2 p-4 name-box">
-            <div class="box border rounded px-3 py-2">
+          <div v-for="user in userList" :key="user.id" class="col-2 p-4 name-box">
+            <div v-if="user.group" :class="[user.group.name, 'box', 'border', 'rounded', 'px-3', 'py-2']">
+              <h4>{{ user.name }} | {{ user.group.name }}</h4>
+            </div>
+            <div v-else :class="['box', 'border', 'rounded', 'px-3', 'py-2']">
               <h4>{{ user.name }}</h4>
             </div>
           </div>
@@ -35,10 +38,11 @@ export default {
   name: 'random',
   data() {
     return {
-      user_list: null,
+      userList: null,
       rndArr: [],
       isBlack: true,
-      message: null
+      message: null,
+      userListGroup: null
     }
   },
   mounted() {
@@ -56,15 +60,9 @@ export default {
   
     let data = firebase.database().ref('users/')
     data.on('value', function (snapshot) {
-      let user_list = snapshot.val()
-      self.user_list = user_list.filter(Boolean)
+      let userList = snapshot.val()
+      self.userList = userList.filter(Boolean)
     })
-
-    for (let i = 0; i < this.user_list.length; i++) {
-      if (!this.user_list[i].group) {
-        this.rndArr.push(this.user_list[i].id)
-      }
-    }
   },
   methods: {
     getImgUrl(pic) {
@@ -78,10 +76,16 @@ export default {
     randomName() {
       let box = document.getElementsByClassName('box')
       for (let i = 0; i < box.length; i++) {
-        if (!this.user_list[i].group) {
+        if (!this.userList[i].group) {
           box[i].classList.remove('flash')
           void box[i].offsetWidth
           box[i].classList.add('flash')
+        }
+      }
+
+      for (let i = 0; i < this.userList.length; i++) {
+        if (!this.userList[i].group) {
+          this.rndArr.push(this.userList[i].id)
         }
       }
 
@@ -96,6 +100,25 @@ export default {
 
 
 <style scoped>
+.A {
+  border-color: #2bbbad !important;
+}
+.B {
+  border-color: #aa66cc !important;
+}
+.C {
+  border-color: #33b5e5 !important;
+}
+.D {
+  border-color: #ffbb33 !important;
+}
+.E {
+  border-color: #ff4444 !important;
+}
+.F {
+  border-color: #00c851 !important;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
