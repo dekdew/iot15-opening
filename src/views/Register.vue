@@ -49,7 +49,7 @@ export default {
 			})
 		},
 		getImgUrl(pic) {
-    	return require('../assets/'+pic)
+			return require('../assets/'+pic)
 		},
 		checkForm: function () {
       if (this.name) {

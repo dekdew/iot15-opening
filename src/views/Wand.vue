@@ -2,26 +2,27 @@
   <div class="random text-center">
   	<div class="container">
   		<h2>ไม้กายสิทธิ์จะเป็นผู้เลือกเจ้า</h2>
-  		<h1>{{ user.name }} {{ user.group.name }}</h1>
+  		<h1>{{ user.name }} {{ user_group }}</h1>
 
-			<carousel-3d height="500em" ref="mycarousel" :space="250" :display="6" :count="6" :autoplay="false" :clickable="false">
-				<slide v-for="(slide, i) in slides" :key="i" :index="i">
-					<img :src="getImgUrl(i+'.svg')" height="500em">
-				</slide>
-			</carousel-3d>
+  		<carousel-3d height="500em" ref="mycarousel" :space="250" :display="6" :count="6" :autoplay="false"
+  			:clickable="false">
+  			<slide v-for="(slide, i) in slides" :key="i" :index="i">
+  				<img :src="getImgUrl(i+'.svg')" height="500em">
+  			</slide>
+  		</carousel-3d>
 
-			<div v-if="user.group">
-				<router-link to="/random" class="btn btn-lg px-3 py-2">
-					<h4>กลับ</h4>
-				</router-link>
-			</div>
-			<div v-else>
-				<button @click="randomWand()" type="submit" class="btn btn-lg px-3 py-2">
-					<h4>โบกนิดสะบัดหน่อย</h4>
-				</button>
-			</div>
-  	</div>
-  </div>
+  		<div v-if="user.group">
+  			<router-link to="/random" class="btn btn-lg px-3 py-2">
+  				<h4>กลับ</h4>
+  			</router-link>
+  		</div>
+  		<div v-else>
+  			<button @click="randomWand()" type="submit" class="btn btn-lg px-3 py-2">
+  				<h4>โบกนิดสะบัดหน่อย</h4>
+  			</button>
+  		</div>
+		</div>
+	</div>
 </template>
 
 
@@ -38,12 +39,13 @@ export default {
 			group: null,
 			wand: null,
 			stop: false,
-			slides: 6
+			slides: 6,
+			user_group: null
     }
 	},
 	components: {
-    Carousel3d,
-    Carousel3d
+		Carousel3d,
+		Slide
   },
 	mounted() {
 		let self = this
@@ -89,7 +91,7 @@ export default {
 	},
 	methods: {
 		getImgUrl(pic) {
-    	return require('../assets/wand/'+pic)
+			return require('../assets/wand/'+pic)
 		},
 		randomWand() {
 			let min = 0
@@ -106,13 +108,13 @@ export default {
 
 			this.user['group'] = this.group[rnd]
 
+			this.user_group = this.user.group.name
+
 			firebase.database().ref('users/' + this.userId).set(this.user)
 
 			firebase.database().ref('group/' + this.user.group.id).update({
-				count: this.group[this.user.id].count + 1
+				count: this.group[this.user.group.id].count + 1
 			})
-
-			// setTimeout(() => this.$router.push('/random/'), 1000)
 		}
 	}
 }

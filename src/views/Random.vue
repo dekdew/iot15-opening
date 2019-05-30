@@ -1,6 +1,6 @@
 <template>
   <div class="random text-center">
-    <!-- <div v-if="isBlack">
+    <div v-if="isBlack">
       <img class="mt-5" :src="getImgUrl('logo.png')" height="200em">
       <h1 class="mt-2">Dobby of Things - ITCamp15</h1>
       <div class="container mt-5">
@@ -10,9 +10,9 @@
     </div>
 
     <div v-else>
-      <img class="mt-4" :src="getImgUrl('logo.png')" height="150em">
-      <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
       <div class="container">
+        <img class="mt-4" :src="getImgUrl('logo.png')" height="150em">
+        <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
         <div class="row my-4">
           <div v-for="user in user_list" :key="user.id" class="col-2 p-4 name-box">
             <div class="box border rounded px-3 py-2">
@@ -20,39 +20,12 @@
             </div>
           </div>
         </div>
-        <button v-show="user_list.length == 23" type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
+        <button type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
           <h4>เรียกสัมภาษณ์</h4>
         </button>
       </div>
-    </div> -->
-
-    <div v-show="isBlack">
-      <img class="mt-5" :src="getImgUrl('logo.png')" height="200em">
-      <h1 class="mt-2">Dobby of Things - ITCamp15</h1>
-      <div class="container mt-5">
-        <h1 class="title">{{ message }}</h1>
-      </div>
-      <div class="wallpaper"></div>
     </div>
-
-    <transition name="fade">
-      <div v-if="!isBlack">
-        <img class="mt-4" :src="getImgUrl('logo.png')" height="150em">
-        <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
-        <div class="container">
-          <div class="row my-4">
-            <div v-for="user in user_list" :key="user.id" class="col-2 p-4 name-box">
-              <div class="box border rounded px-3 py-2">
-                <h4>{{ user.name }}</h4>
-              </div>
-            </div>
-          </div>
-          <button v-show="user_list.length == 23" type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
-            <h4>เรียกสัมภาษณ์</h4>
-          </button>
-        </div>
-    </transition>
-    </div>
+  </div>
 </template>
 
 <script>
