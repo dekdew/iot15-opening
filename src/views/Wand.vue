@@ -1,14 +1,27 @@
 <template>
   <div class="random text-center">
-    <div class="container">
-			<h2>ไม้กายสิทธิ์จะเป็นผู้เลือกเจ้า</h2>
-			<h1>{{ user.name }}</h1>
-			<button @click="randomWand()" type="submit" class="btn btn-lg mt-4 px-3 py-2">
-				<h4>โบกนิดสะบัดหน่อย</h4>
-			</button>
-    </div>
+  	<div class="container">
+  		<h2>ไม้กายสิทธิ์จะเป็นผู้เลือกเจ้า</h2>
+  		<h1>{{ user.name }}</h1>
+
+  		<!-- <div v-for="i in 6" :key="i" class="">
+        <img :src="getImgUrl(i+'.svg')" alt=""><h1>i</h1>
+      </div> -->
+
+
+  <carousel-3d height="500em" :perspective="0" :space="400" :display="6" :count="6" :autoplay-timeout="300">
+    <slide v-for="(slide, i) in slides" :key="i" :index="i">
+			<img :src="getImgUrl(i+'.svg')" height="500em">
+    </slide>
+  </carousel-3d>
+
+  		<button @click="randomWand()" type="submit" class="btn btn-lg px-3 py-2">
+  			<h4>โบกนิดสะบัดหน่อย</h4>
+  		</button>
+  	</div>
   </div>
 </template>
+
 
 <script>
 import firebase from 'firebase'
@@ -21,7 +34,8 @@ export default {
 			user: null,
 			group: null,
 			wand: null,
-			stop: false
+			stop: false,
+			slides: 6
     }
 	},
 	mounted() {
@@ -68,7 +82,7 @@ export default {
 	},
 	methods: {
 		getImgUrl(pic) {
-    	return require('../assets/'+pic)
+    	return require('../assets/wand/'+pic)
 		},
 		randomWand() {
 			let min = 0
@@ -126,4 +140,9 @@ h2 {
 	border: none;
 }
 
+
+/* figure */
+.carousel-3d-slide {
+	background-color: unset;
+}
 </style>
