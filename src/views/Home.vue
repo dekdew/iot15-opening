@@ -46,6 +46,25 @@ export default {
 
 
 <style scoped>
+.A {
+  border-color: #2bbbad !important;
+}
+.B {
+  border-color: #aa66cc !important;
+}
+.C {
+  border-color: #33b5e5 !important;
+}
+.D {
+  border-color: #ffbb33 !important;
+}
+.E {
+  border-color: #ff4444 !important;
+}
+.F {
+  border-color: #00c851 !important;
+}
+
 .home {
   user-select: none;
 	color: white;
@@ -71,7 +90,7 @@ h1 {
 	border: none;
 }
 .box {
-  background-color: #0000;
+  background-color: #fff1;
   color: #fff;
 }
 .select {

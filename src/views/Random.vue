@@ -153,7 +153,7 @@ h1 {
 	border: none;
 }
 .box {
-  background-color: #0000;
+  background-color: #fff1;
   color: #fff;
 }
 .select {
