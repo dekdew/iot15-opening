@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Random from './views/Random'
+import Register from './views/Register'
+import Wait from './views/Wait'
+import Wand from './views/Wand'
+import Home from './views/Home'
 
 Vue.use(Router)
 
@@ -9,17 +13,30 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/random',
+      name: 'random',
+      component: Random
+    },
+    {
+      path: '/wand/:id',
+      name: 'wand',
+      component: Wand
+    },
+    {
+      path: '/register/:id',
+      name: 'register',
+      component: Register
+    }
+    ,
+    {
+      path: '/wait/:id',
+      name: 'wait',
+      component: Wait
+    },
+    {
       path: '/',
       name: 'home',
       component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     }
   ]
 })

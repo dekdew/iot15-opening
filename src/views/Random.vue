@@ -1,5 +1,5 @@
 <template>
-  <div class="home text-center">
+  <div class="random text-center">
     <div class="container">
       <img class="mb-1" :src="getImgUrl('logo.png')" height="150em">
       <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
@@ -10,6 +10,12 @@
           </div>
         </div>
       </div>
+      <!-- <button v-show="user_list.length == 23" type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
+        <h4>เรียกสัมภาษณ์</h4>
+      </button> -->
+      <button type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
+        <h4>เรียกสัมภาษณ์</h4>
+      </button>
     </div>
   </div>
 </template>
@@ -18,7 +24,7 @@
 import firebase from 'firebase'
 
 export default {
-  name: 'home',
+  name: 'random',
   data() {
     return {
       user_list: null,
@@ -32,18 +38,44 @@ export default {
       let user_list = snapshot.val()
       self.user_list = user_list.filter(Boolean)
     })
+
+    for (let i = 0; i < this.user_list.length; i++) {
+      if (!this.user_list[i].group) {
+        this.rndArr.push(this.user_list[i].id)
+      }
+    }
   },
   methods: {
     getImgUrl(pic) {
       return require('../assets/' + pic)
-    }
+    },
+    shuffle(array) {
+      if (array.length > 1) {
+        array.sort(() => Math.random() - 0.5)
+      }
+    },
+    randomName() {
+      let box = document.getElementsByClassName('box')
+      for (let i = 0; i < box.length; i++) {
+        if (!this.user_list[i].group) {
+          box[i].classList.remove('flash')
+          void box[i].offsetWidth
+          box[i].classList.add('flash')
+        }
+      }
+
+      this.shuffle(this.rndArr)
+      let rnd = this.rndArr[0]
+      setTimeout(() => box[rnd-1].classList.add('select'), 2000)
+      setTimeout(() => this.$router.push('/wand/' + rnd), 4000)
+    },
   }
 }
 </script>
 
 
 <style scoped>
-.home {
+.random {
   user-select: none;
 	color: white;
 	height: 100vh;
