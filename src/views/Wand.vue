@@ -2,22 +2,24 @@
   <div class="random text-center">
   	<div class="container">
   		<h2>ไม้กายสิทธิ์จะเป็นผู้เลือกเจ้า</h2>
-  		<h1>{{ user.name }}</h1>
+  		<h1>{{ user.name }} {{ user.group.name }}</h1>
 
-  		<!-- <div v-for="i in 6" :key="i" class="">
-        <img :src="getImgUrl(i+'.svg')" alt=""><h1>i</h1>
-      </div> -->
+			<carousel-3d height="500em" ref="mycarousel" :space="250" :display="6" :count="6" :autoplay="false" :clickable="false">
+				<slide v-for="(slide, i) in slides" :key="i" :index="i">
+					<img :src="getImgUrl(i+'.svg')" height="500em">
+				</slide>
+			</carousel-3d>
 
-
-  <carousel-3d height="500em" :perspective="0" :space="400" :display="6" :count="6" :autoplay-timeout="300">
-    <slide v-for="(slide, i) in slides" :key="i" :index="i">
-			<img :src="getImgUrl(i+'.svg')" height="500em">
-    </slide>
-  </carousel-3d>
-
-  		<button @click="randomWand()" type="submit" class="btn btn-lg px-3 py-2">
-  			<h4>โบกนิดสะบัดหน่อย</h4>
-  		</button>
+			<div v-if="user.group">
+				<router-link to="/random" class="btn btn-lg px-3 py-2">
+					<h4>กลับ</h4>
+				</router-link>
+			</div>
+			<div v-else>
+				<button @click="randomWand()" type="submit" class="btn btn-lg px-3 py-2">
+					<h4>โบกนิดสะบัดหน่อย</h4>
+				</button>
+			</div>
   	</div>
   </div>
 </template>
@@ -25,6 +27,7 @@
 
 <script>
 import firebase from 'firebase'
+import { Carousel3d, Slide } from 'vue-carousel-3d'
 
 export default {
   name: 'wand',
@@ -38,6 +41,10 @@ export default {
 			slides: 6
     }
 	},
+	components: {
+    Carousel3d,
+    Carousel3d
+  },
 	mounted() {
 		let self = this
 		let userData = firebase.database().ref('users/' + self.userId)
@@ -95,6 +102,7 @@ export default {
 				}
 			}
 
+			this.$refs.mycarousel.goSlide(rnd)
 
 			this.user['group'] = this.group[rnd]
 
@@ -104,7 +112,7 @@ export default {
 				count: this.group[this.user.id].count + 1
 			})
 
-			setTimeout(() => this.$router.push('/random/'), 4000)
+			// setTimeout(() => this.$router.push('/random/'), 1000)
 		}
 	}
 }
@@ -144,5 +152,6 @@ h2 {
 /* figure */
 .carousel-3d-slide {
 	background-color: unset;
+	border: unset;
 }
 </style>

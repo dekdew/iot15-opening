@@ -1,23 +1,58 @@
 <template>
   <div class="random text-center">
-    <div class="container">
-      <img class="mb-1" :src="getImgUrl('logo.png')" height="150em">
+    <!-- <div v-if="isBlack">
+      <img class="mt-5" :src="getImgUrl('logo.png')" height="200em">
+      <h1 class="mt-2">Dobby of Things - ITCamp15</h1>
+      <div class="container mt-5">
+        <h1 class="title">{{ message }}</h1>
+      </div>
+      <div class="wallpaper"></div>
+    </div>
+
+    <div v-else>
+      <img class="mt-4" :src="getImgUrl('logo.png')" height="150em">
       <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
-      <div class="row my-4">
-        <div v-for="user in user_list" :key="user.id" class="col-2 p-4 name-box">
-          <div class="box border rounded px-3 py-2">
-            <h4>{{ user.name }}</h4>
+      <div class="container">
+        <div class="row my-4">
+          <div v-for="user in user_list" :key="user.id" class="col-2 p-4 name-box">
+            <div class="box border rounded px-3 py-2">
+              <h4>{{ user.name }}</h4>
+            </div>
           </div>
         </div>
+        <button v-show="user_list.length == 23" type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
+          <h4>เรียกสัมภาษณ์</h4>
+        </button>
       </div>
-      <!-- <button v-show="user_list.length == 23" type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
-        <h4>เรียกสัมภาษณ์</h4>
-      </button> -->
-      <button type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
-        <h4>เรียกสัมภาษณ์</h4>
-      </button>
+    </div> -->
+
+    <div v-show="isBlack">
+      <img class="mt-5" :src="getImgUrl('logo.png')" height="200em">
+      <h1 class="mt-2">Dobby of Things - ITCamp15</h1>
+      <div class="container mt-5">
+        <h1 class="title">{{ message }}</h1>
+      </div>
+      <div class="wallpaper"></div>
     </div>
-  </div>
+
+    <transition name="fade">
+      <div v-if="!isBlack">
+        <img class="mt-4" :src="getImgUrl('logo.png')" height="150em">
+        <h1>ทำเนียบจอมเวทย์ฝึกหัด</h1>
+        <div class="container">
+          <div class="row my-4">
+            <div v-for="user in user_list" :key="user.id" class="col-2 p-4 name-box">
+              <div class="box border rounded px-3 py-2">
+                <h4>{{ user.name }}</h4>
+              </div>
+            </div>
+          </div>
+          <button v-show="user_list.length == 23" type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="randomName">
+            <h4>เรียกสัมภาษณ์</h4>
+          </button>
+        </div>
+    </transition>
+    </div>
 </template>
 
 <script>
@@ -28,11 +63,24 @@ export default {
   data() {
     return {
       user_list: null,
-      rndArr: []
+      rndArr: [],
+      isBlack: true,
+      message: null
     }
   },
   mounted() {
     let self = this
+
+    let bData = firebase.database().ref('isBlack')
+		bData.on('value', function(snapshot) {
+        self.isBlack = snapshot.val()
+    })
+
+    let mData = firebase.database().ref('message')
+		mData.on('value', function(snapshot) {
+        self.message = snapshot.val()
+    })
+  
     let data = firebase.database().ref('users/')
     data.on('value', function (snapshot) {
       let user_list = snapshot.val()
@@ -75,6 +123,15 @@ export default {
 
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.title {
+  font-size: 10em;
+}
 .random {
   user-select: none;
 	color: white;

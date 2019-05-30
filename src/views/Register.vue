@@ -2,19 +2,22 @@
   <div class="register text-center">
   	<div v-show="isBlack" class="black"></div>
 
-		<img class="mb-1" :src="getImgUrl('logo.png')" height="200em">
-
-  	<div v-show="!isBlack" class="container">
-  		<h1 class="mb-4">สวัสดีจอมเวทย์ฝึกหัด</h1>
-  		<form class="form">
-  			<div class="form-group mx-auto" style="max-width:40rem;">
-  				<input v-model="name" class="form-control form-control-lg" placeholder="กรอกชื่อเล่นของเจ้า" required maxlength="10">
-  			</div>
-				<button type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="setName(userId, name); checkForm();">
-					เข้าสู่โลกแห่งเวทมนตร์
-				</button>
-  		</form>
-  	</div>
+		<transition name="fade">
+			<div v-if="!isBlack">
+				<img class="mb-1" :src="getImgUrl('logo.png')" height="200em">
+				<div id="form" class="container">
+					<h1 class="mb-4">สวัสดีจอมเวทย์ฝึกหัด</h1>
+					<form class="form">
+						<div class="form-group mx-auto" style="max-width:40rem;">
+							<input v-model="name" class="form-control form-control-lg" placeholder="กรอกชื่อเล่นของเจ้า" required maxlength="10">
+						</div>
+						<button type="submit" class="btn btn-lg mt-4 px-3 py-2" @click="setName(userId, name); checkForm();">
+							เข้าสู่โลกแห่งเวทมนตร์
+						</button>
+					</form>
+				</div>
+			</div>
+		</transition>
   </div>
 </template>
 
@@ -59,6 +62,13 @@ export default {
 
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 .register {
 	user-select: none;
 	color: white;

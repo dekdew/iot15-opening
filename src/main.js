@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'
 import firebase from 'firebase'
 import bootstrap from 'bootstrap/scss/bootstrap.scss'
-import Carousel3d from 'vue-carousel-3d';
+import Carousel3d from 'vue-carousel-3d'
 
-Vue.use(Carousel3d);
+Vue.use(Carousel3d)
 
 Vue.config.productionTip = false
 
