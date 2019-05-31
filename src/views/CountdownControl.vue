@@ -34,6 +34,20 @@
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-12 text-left">
+						<h3>Time's Up</h3>
+					</div>
+					<div class="col-10">
+						<div class="form-group">
+							<input v-model="countdown.timesUp" type="text" class="form-control" placeholder="Title">
+						</div>
+					</div>
+					<div class="col-2">
+						<button @click="setTimesUp(countdown.timesUp)" class="btn btn-warning btn-block">SET</button>
+					</div>
+				</div>
+
 				<hr class="hr-sm">
 
 				<div class="row">
@@ -98,6 +112,11 @@ export default {
 		setTitle(value) {
 			firebase.database().ref('countdown/').update({
 				title: value
+			})
+		},
+		setTimesUp(value) {
+			firebase.database().ref('countdown/').update({
+				timesUp: value
 			})
 		},
 		addTime(value) {

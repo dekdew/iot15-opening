@@ -5,7 +5,7 @@
         <div class="container">
             <vac v-if="isStart" ref="vac" :end-time="new Date(countdown.startTime).getTime() + countdown.time">
               <time slot="process" slot-scope="{ timeObj }">{{ `${timeObj.h}:${timeObj.m}:${timeObj.s}` }}</time>
-              <time slot="finish">Time's Up!</time>
+              <time slot="finish">{{ countdown.timesUp }}</time>
             </vac>
             <time v-else>{{ countdown.countdownTime }}</time>
         </div>
