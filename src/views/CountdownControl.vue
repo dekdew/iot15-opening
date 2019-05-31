@@ -40,22 +40,29 @@
 					<div class="col-12 text-left">
 						<h3>Set Time</h3>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
+						<button @click="addTime(5)" class="btn my-2 btn-primary btn-lg btn-block">+5 MINS</button>
+					</div>
+					<div class="col-3">
 						<button @click="addTime(10)" class="btn my-2 btn-primary btn-lg btn-block">+10 MINS</button>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<button @click="addTime(30)" class="btn my-2 btn-primary btn-lg btn-block">+30 MINS</button>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<button @click="addTime(60)" class="btn my-2 btn-primary btn-lg btn-block">+60 MINS</button>
 					</div>
-					<div class="col-4">
+
+					<div class="col-3">
+						<button @click="subTime(5)" class="btn my-2 btn-danger btn-lg btn-block">-5 MINS</button>
+					</div>
+					<div class="col-3">
 						<button @click="subTime(10)" class="btn my-2 btn-danger btn-lg btn-block">-10 MINS</button>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<button @click="subTime(30)" class="btn my-2 btn-danger btn-lg btn-block">-30 MINS</button>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<button @click="subTime(60)" class="btn my-2 btn-danger btn-lg btn-block">-60 MINS</button>
 					</div>
 				</div>
