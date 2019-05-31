@@ -7,17 +7,17 @@
 						<time slot="process" slot-scope="{ timeObj }">{{ `${timeObj.h}:${timeObj.m}:${timeObj.s}` }}</time>
 						<time slot="finish">{{ countdown.timesUp }}</time>
 					</vac>
-					<time v-else>{{ countdownTime }}</time>
-					<i @click="resetTime" class="fa fa-refresh pl-3 text-dark"></i>
+					<time v-else>{{ countdown.countdownTime }}</time>
+					<i @click="resetTime" class="h1 fa fa-refresh pl-3 text-dark"></i>
 				</div>
 				<div v-else>
-					<time>{{ countdownTime }}</time>
-					<i @click="resetTime" class="fa fa-refresh pl-3 text-dark"></i>
+					<time>{{ countdown.countdownTime }}</time>
+					<i @click="resetTime" class="h1 fa fa-refresh pl-3 text-dark"></i>
 				</div>
 
 				<div class="row">
 					<div class="col-12 text-left">
-						<h3>Control</h3>
+						<h3>Control: +{{countdownTime}} <i @click="time=0" class="fa fa-refresh text-dark"></i></h3>
 					</div>
 					<div class="col">
 						<button @click="setTime" class="btn btn-lg btn-warning btn-block">SET</button>
@@ -164,6 +164,7 @@ export default {
 	},
 	computed: {
 		countdownTime: function () {
+			if (this.time < 0) this.time = 0
 			let min =  Math.floor(this.time/60)%60
 			let hour = Math.floor(this.time/3600)
 			let formattedMin = ('0' + min).slice(-2);
@@ -181,9 +182,6 @@ export default {
 }
 .w-80 {
   width: 70%;
-}
-i {
-	font-size: 2em !important;
 }
 .A, .A hr {
   border-color: #2bbbad !important;
