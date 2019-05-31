@@ -4,6 +4,9 @@ import router from './router'
 import firebase from 'firebase'
 import bootstrap from 'bootstrap/scss/bootstrap.scss'
 import Carousel3d from 'vue-carousel-3d'
+import vueAwesomeCountdown from 'vue-awesome-countdown'
+
+Vue.use(vueAwesomeCountdown, 'vac')
 
 Vue.use(Carousel3d)
 

@@ -7,6 +7,8 @@ import Wand from './views/Wand'
 import Home from './views/Home'
 import Group from './views/Group'
 import GroupControl from './views/GroupControl'
+import CountdownDisplay from './views/CountdownDisplay'
+import CountdownControl from './views/CountdownControl'
 
 Vue.use(Router)
 
@@ -49,6 +51,16 @@ export default new Router({
       path: '/group/control-password-334334334',
       name: 'groupcontrol',
       component: GroupControl
+    },
+    {
+      path: '/countdown',
+      name: 'countdownDisplay',
+      component: CountdownDisplay
+    },
+    {
+      path: '/countdown/control-password-334334334',
+      name: 'countdownControl',
+      component: CountdownControl
     }
   ]
 })
