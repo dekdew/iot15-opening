@@ -123,7 +123,9 @@ export default {
 		countdownTime: function () {
 			let min =  Math.floor(this.time/60)%60
 			let hour = Math.floor(this.time/3600)
-			return `${hour}:${min}:00`
+			let formattedMin = ('0' + min).slice(-2);
+			let formattedHour = ('0' + hour).slice(-2);
+			return `${formattedHour}:${formattedMin}:00`
 		}
 	}
 }
