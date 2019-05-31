@@ -42,14 +42,6 @@ export default {
     getImgUrl(pic) {
       return require('../assets/' + pic)
     }
-  },
-  watch: {
-    isStart() {
-      if (this.isStart) {
-        const vm = this
-        vm.$refs.vac.startCountdown(true)
-      }
-    }
   }
 }
 </script>

@@ -1,10 +1,19 @@
 <template>
 	<div class="home text-center">
 		<div class="container">
-			<h1 class="mt-5">Countdown Control</h1>
 			<div class="box p-4 border rounded">
-
-				<time>{{ countdownTime }}</time><i @click="resetTime" class="fa fa-refresh pl-3 text-dark"></i>
+				<div v-if="startTime">
+					<vac v-if="countdown.isStart" ref="vac" :end-time="new Date(startTime).getTime() + countdown.time">
+						<time slot="process" slot-scope="{ timeObj }">{{ `${timeObj.h}:${timeObj.m}:${timeObj.s}` }}</time>
+						<time slot="finish">{{ countdown.timesUp }}</time>
+					</vac>
+					<time v-else>{{ countdownTime }}</time>
+					<i @click="resetTime" class="fa fa-refresh pl-3 text-dark"></i>
+				</div>
+				<div v-else>
+					<time>{{ countdownTime }}</time>
+					<i @click="resetTime" class="fa fa-refresh pl-3 text-dark"></i>
+				</div>
 
 				<div class="row">
 					<div class="col-12 text-left">
@@ -94,7 +103,8 @@ export default {
   data() {
     return {
 			countdown: null,
-			time: 0
+			time: 0,
+			startTime: null
     }
   },
   mounted() {
@@ -103,6 +113,12 @@ export default {
     data.on('value', function (snapshot) {
       let countdown = snapshot.val()
       self.countdown = countdown
+		})
+		
+		let dataSt = firebase.database().ref('countdown/startTime')
+    dataSt.on('value', function (snapshot) {
+      let startTime = snapshot.val()
+      self.startTime = startTime
     })
   },
   methods: {
@@ -128,13 +144,14 @@ export default {
 		resetTime() {
 			this.time = 0
 			firebase.database().ref('countdown/').update({
+				isStart: false,
 				countdownTime: this.countdownTime
 			})
 		},
 		start() {
 			firebase.database().ref('countdown/').update({
-				isStart: true,
 				startTime: new Date(),
+				isStart: true,
 			})
 		},
 		setTime() {
