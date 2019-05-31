@@ -5,6 +5,8 @@ import Register from './views/Register'
 import Wait from './views/Wait'
 import Wand from './views/Wand'
 import Home from './views/Home'
+import Group from './views/Group'
+import GroupControl from './views/GroupControl'
 
 Vue.use(Router)
 
@@ -37,6 +39,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/group',
+      name: 'group',
+      component: Group
+    },
+    {
+      path: '/group/control-password-334334334',
+      name: 'groupcontrol',
+      component: GroupControl
     }
   ]
 })
