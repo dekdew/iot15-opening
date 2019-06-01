@@ -9,6 +9,7 @@ import Group from './views/Group'
 import GroupControl from './views/GroupControl'
 import CountdownDisplay from './views/CountdownDisplay'
 import CountdownControl from './views/CountdownControl'
+import RandomGroup from './views/RandomGroup'
 
 Vue.use(Router)
 
@@ -61,6 +62,11 @@ export default new Router({
       path: '/countdown/control-password-334334334',
       name: 'countdownControl',
       component: CountdownControl
+    },
+    {
+      path: '/random-group',
+      name: 'randomGroup',
+      component: RandomGroup
     }
   ]
 })
