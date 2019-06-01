@@ -97,7 +97,7 @@ export default {
 				rnd = Math.floor(Math.random() * (+max - +min) + +min)
 			}
 
-			let randomTime = Math.floor(Math.random() * (+10 - +5) + +5)
+			let randomTime = Math.floor(Math.random() * (+20 - +5) + +5)
 			this.setAnimation(randomTime, 1)
 
 			setTimeout(() => {
