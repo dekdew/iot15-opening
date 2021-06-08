@@ -11,7 +11,7 @@
   			</slide>
   		</carousel-3d>
 
-  		<div v-if="user.group">
+  		<div v-if="user.group.name !== "">
   			<router-link to="/random" class="btn btn-lg px-3 py-2">
   				<h4>กลับ</h4>
   			</router-link>
